@@ -3,11 +3,17 @@ var watch = require('gulp-watch');
 var browserSync = require('browser-sync').create();
 
 var styles = require('./styles');
+var scripts = require('./scripts');
 
 gulp.task('cssInject', cssInject);
 function cssInject() {
   return gulp.src('./temp/styles/styles.css')
     .pipe(browserSync.stream());
+}
+
+gulp.task('scriptsRefresh', scriptsRefresh);
+function scriptsRefresh() {
+  browserSync.reload();
 }
 
 gulp.task('watch', function() {
@@ -26,5 +32,10 @@ gulp.task('watch', function() {
   watch('./assets/styles/**/*.css', function() {
     styles();
     cssInject();
+  });
+
+  watch('./assets/scripts/**/*.js', function() {
+    scripts();
+    scriptsRefresh();
   });
 });
