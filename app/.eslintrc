@@ -1,5 +1,9 @@
 {
     "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "sourceType": "module",
+    },
     "rules": {
         "consistent-return": 2,
         "indent"           : [1, 2],

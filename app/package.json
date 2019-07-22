@@ -6,7 +6,8 @@
   },
   "dependencies": {
     "jquery": ">=3.4.0",
-    "normalize.css": "^8.0.0"
+    "normalize.css": "^8.0.0",
+    "waypoints": "^4.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
