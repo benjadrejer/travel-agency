@@ -3,7 +3,6 @@ var watch = require('gulp-watch');
 var browserSync = require('browser-sync').create();
 
 var styles = require('./styles');
-var scripts = require('./scripts');
 
 gulp.task('cssInject', cssInject);
 function cssInject() {
@@ -34,8 +33,5 @@ gulp.task('watch', function() {
     cssInject();
   });
 
-  watch('./assets/scripts/**/*.js', function() {
-    scripts();
-    scriptsRefresh();
-  });
+  watch('./assets/scripts/**/*.js', gulp.series('scripts', 'scriptsRefresh'));
 });

@@ -1,7 +1,18 @@
 var gulp = require('gulp'),
-  webpack = require('webpack');
+  webpack = require('webpack'),
+  modernizr = require('gulp-modernizr');
 
-gulp.task('scripts', scripts);
+gulp.task('modernizr', function() {
+  return gulp.src(['./assets/styles/**/*.css', './assets/scripts/**/*.js'])
+    .pipe(modernizr({
+      options: [
+        'setClasses',
+      ]
+    }))
+    .pipe(gulp.dest('./temp/scripts/'));
+});
+
+gulp.task('buildScripts', scripts);
 function scripts() {
   webpack(require('../../webpack.config'), function(error, stats) {
     if (error) {
@@ -11,4 +22,4 @@ function scripts() {
   });
 }
 
-module.exports = scripts;
+gulp.task('scripts', gulp.series('modernizr', 'buildScripts'));
