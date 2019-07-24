@@ -13,13 +13,16 @@ gulp.task('modernizr', function() {
 });
 
 gulp.task('buildScripts', scripts);
-function scripts() {
-  webpack(require('../../webpack.config'), function(error, stats) {
+function scripts(callback) {
+  return webpack(require('../../webpack.config'), function(error, stats) {
     if (error) {
       console.log(err.toString());
     }
+    callback();
     console.log(stats.toString());
   });
 }
 
-gulp.task('scripts', gulp.series('modernizr', 'buildScripts'));
+gulp.task('scripts', function(done) {
+  return gulp.series('modernizr', 'buildScripts')(done);
+});
